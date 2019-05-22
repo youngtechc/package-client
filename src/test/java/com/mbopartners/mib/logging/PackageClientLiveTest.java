@@ -30,6 +30,7 @@ public class PackageClientLiveTest {
 	public void getPackageById() {
 		Package p = client.getJsonPackage("0010f210667811e9a4190a89d826466e");
 		assertEquals(p.getId(), "0010f210667811e9a4190a89d826466e");
+		System.out.println(p.getRequestPayload());
 	}
 
 	@Test
