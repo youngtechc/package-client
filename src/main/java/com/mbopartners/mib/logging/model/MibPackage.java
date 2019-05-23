@@ -2,25 +2,34 @@ package com.mbopartners.mib.logging.model;
 
 import java.util.HashMap;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
-public class Package {
+@XmlRootElement
+public class MibPackage {
 	private String id;
 	private String service;
 	private String message;
-	@JsonProperty("request_payload")
+	@XmlElement(name="request_payload")
 	private String requestPayload;
-	@JsonProperty("parent_package_id")
+	@XmlElement(name="parent_package_id")
 	private String parentPackageId;
-	// private HashMap<String, String> headers = new HashMap<>();
+	private HashMap<String, String> headers;
+	private HashMap<String, String> properties;
 
-	public Package() {};
+	public MibPackage() {};
 
-	public Package(String id, String service, String message) {
+	public MibPackage(String id, String service, String message) {
 		this.id = id;
 		this.service = service;
 		this.message = message;
 		this.requestPayload = "";
+		this.headers = null;
+		this.properties = null;
+	}
+	public MibPackage(String id, String service, String message, String requestPayload) {
+		this(id, service, message);
+		this.requestPayload = requestPayload;
 	}
 	public String getId() {
 		return this.id;
@@ -37,6 +46,12 @@ public class Package {
 	public String getParentPackageId() {
 		return this.parentPackageId;
 	}
+	public HashMap<String, String> getProperties() {
+		return properties;
+	}
+	public HashMap<String, String> getHeaders() {
+		return this.headers;
+	}
 	public void setId(String val) {
 		this.id = val;
 	}
@@ -51,5 +66,11 @@ public class Package {
 	}
 	public void setParentPackageId(String val) {
 		this.parentPackageId = val;
+	}
+	public void setHeaders(HashMap<String, String> val) {
+		this.headers = val;
+	}
+	public void setProperties(HashMap<String, String> properties) {
+		this.properties = properties;
 	}
 }
